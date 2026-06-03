@@ -33,22 +33,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Contactformulier demo — vervangen door echte backend integratie later
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      const success = document.getElementById('formSuccess');
-      if (btn) btn.textContent = 'VERSTUURD ✓';
-      if (success) success.classList.add('show');
-      setTimeout(() => {
-        form.reset();
-        if (btn) btn.innerHTML = 'STUUR \'T MAAR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-        if (success) success.classList.remove('show');
-      }, 4500);
-    });
-  }
+  // Contactformulier — verstuurd via Formspree
 
   // Nieuwsbrief demo
   const newsletter = document.getElementById('newsletterForm');
