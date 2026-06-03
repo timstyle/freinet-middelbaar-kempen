@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De visie — Freinet Middelbaar Kempen</title>
+<meta name="description" content="Wat betekent Freinet middelbaar? Leren door te doen, coöperatief werken, badges in plaats van rapporten. Een echte alternatieve secundaire school.">
+<meta name="theme-color" content="#A5E0E5">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F9D71C' stroke='%23151515' stroke-width='4'/%3E%3Cpath d='M22 28 L32 20 L42 28 L32 36 Z' fill='%23151515'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-header { background: var(--mint); }
+  .page-header h1 em {
+    font-style: normal;
+    background: var(--yellow);
+    padding: 0 0.2em;
+    border: 3px solid var(--ink);
+    display: inline-block;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .page-star-1 { top: 20%; right: 6%; width: 110px; height: 110px; animation: bobble 5s ease-in-out infinite; }
+  @media (max-width: 720px) { .page-star-1 { display: none; } }
+
+  /* Pilaren */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+  @media (max-width: 820px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+  .pillar {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 2.2rem;
+    box-shadow: 8px 8px 0 var(--ink);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    position: relative;
+  }
+  .pillar:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--ink);
+  }
+  .pillar-num {
+    position: absolute;
+    top: -25px; left: 25px;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    padding: 0.3rem 0.9rem;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .pillar:nth-child(2) .pillar-num { background: var(--pink); color: var(--paper); }
+  .pillar:nth-child(3) .pillar-num { background: var(--lime); }
+  .pillar:nth-child(4) .pillar-num { background: var(--coral); }
+  .pillar h3 { margin: 1rem 0 1rem; font-size: 1.5rem; }
+  .pillar p { color: var(--ink-soft); font-size: 1rem; line-height: 1.6; }
+
+  /* Hoe-strook */
+  .how-strip {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 820px) { .how-strip { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .how-strip h2 em {
+    font-style: normal;
+    background: var(--yellow);
+    padding: 0 0.2em;
+    border: 3px solid var(--ink);
+    display: inline-block;
+    transform: rotate(-2deg);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .how-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 3px solid var(--ink);
+  }
+  .how-list li {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 3px solid var(--ink);
+    align-items: start;
+  }
+  @media (max-width: 560px) {
+    .how-list li { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+  .how-list-label {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--yellow);
+    padding: 0.5rem 0.8rem;
+    border: 2px solid var(--ink);
+    text-align: center;
+    align-self: start;
+    display: inline-block;
+  }
+  .how-list-text {
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+  .how-list-text strong { font-weight: 800; font-size: 1.1rem; }
+
+  /* Voorbeelden — scholen die het al doen */
+  .examples {
+    background: var(--paper);
+    padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+  }
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 820px) { .examples-grid { grid-template-columns: 1fr 1fr; } }
+  .school-card {
+    background: var(--mint);
+    border: 3px solid var(--ink);
+    padding: 1.5rem;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .school-card:nth-child(2) { background: var(--yellow); }
+  .school-card:nth-child(3) { background: var(--pink); color: var(--paper); }
+  .school-card:nth-child(4) { background: var(--lime); }
+  .school-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+  .school-card span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Klein CTA */
+  .small-cta {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: clamp(3rem, 5vw, 5rem) 0;
+  }
+  .small-cta h2 { color: var(--paper); max-width: 20ch; margin: 0 auto 2rem; }
+  .small-cta h2 em { font-style: normal; color: var(--yellow); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+      </span>
+      <span class="brand-text">Freinet Middelbaar<small>Kempen · 2027</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="visie.html">De visie</a></li>
+      <li><a href="updates.html">Updates</a></li>
+      <li><a href="helpen.html">Help mee</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <span class="star page-star-1" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#E86A9B" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+  <div class="container">
+    <div class="reveal">
+      <span class="label">DE VISIE </span>
+      <h1 style="margin-top: 1rem;">Wat betekent Freinet <em>middelbaar</em>?</h1>
+      <p class="page-header-lead">
+        Geen experiment. Geen knutselschool. Professioneel uitgewerkt secundair onderwijs, met eigen leerplannen, dat al jaren bewijst dat het werkt &mdash; in Sint-Niklaas, Kortrijk, Mechelen. Wij brengen die aanpak naar de Kempen.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PILAREN -->
+<section class="bg-mint-pale">
+  <div class="container">
+    <div class="reveal">
+      <span class="label">DE VIER PIJLERS </span>
+      <h2 style="margin-top: 1rem; max-width: 20ch;">Zo werkt een Freinet middelbaar.</h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <span class="pillar-num">01</span>
+        <h3>Ervaring als startpunt</h3>
+        <p>Leerlingen vertrekken vanuit hun eigen vragen en interesses. Kennis ontstaat niet uit een handboek, maar uit de wereld die ze samen onderzoeken. De klas is een werkplaats, niet een luisterzaal.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.1s">
+        <span class="pillar-num">02</span>
+        <h3>Proefondervindelijk leren</h3>
+        <p>Hypothese, experiment, conclusie. Niet omdat het moet, maar omdat het logisch voelt. Wetenschappelijk denken wordt een gewoonte &mdash; geen vak op dinsdagochtend.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.15s">
+        <span class="pillar-num">03</span>
+        <h3>Coöperatief werken</h3>
+        <p>Leerlingen werken samen aan zinvolle projecten. Ze leren van elkaar, nemen verantwoordelijkheid en ontdekken wat het betekent om deel uit te maken van een groep. Samen weet je gewoon meer.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.2s">
+        <span class="pillar-num">04</span>
+        <h3>Betekenisvolle context</h3>
+        <p>Wat leerlingen leren, komt tot leven. Een tekst schrijf je voor een echt publiek. Een berekening los je op voor een echt probleem. Een proef doe je om iets echt te ontdekken. Leren wordt doen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOE WERKT HET -->
+<section class="bg-paper">
+  <div class="container">
+    <div class="how-strip">
+      <div class="reveal">
+        <span class="label">IN DE PRAKTIJK </span>
+        <h2 style="margin-top: 1rem;">Hoe ziet zo'n <em>schooldag</em> eruit?</h2>
+        <p style="margin-top: 1.5rem; font-size: 1.05rem; color: var(--ink-soft);">Niet elke dag hetzelfde uurrooster. Niet elke week hetzelfde ritme. Wel elke dag: structuur, aandacht, en een duidelijk doel.</p>
+      </div>
+
+      <ol class="how-list reveal" style="transition-delay: 0.15s">
+        <li>
+          <span class="how-list-label">Graad 1</span>
+          <span class="how-list-text"><strong>Brede eerste graad.</strong> Leerlingen verkennen breed, zonder vroeg vast te pinnen in een richting. Wie ontdekt wat hij leuk vindt, kan er later dieper in duiken.</span>
+        </li>
+        <li>
+          <span class="how-list-label">Leerstof</span>
+          <span class="how-list-text"><strong>Cursussen in plaats van vakken.</strong> Opgebouwd rond Freinettechnieken. Wiskunde, taal, wetenschap &mdash; allemaal nog steeds &mdash; maar verweven, niet in losse bakjes.</span>
+        </li>
+        <li>
+          <span class="how-list-label">Evaluatie</span>
+          <span class="how-list-text"><strong>Een badgeboek, geen rapport.</strong> Leerlingen behalen competenties en maken hun groei zichtbaar. Voor zichzelf, niet voor een cijfer tussen 0 en 10.</span>
+        </li>
+        <li>
+          <span class="how-list-label">Klasgroep</span>
+          <span class="how-list-text"><strong>Classe unique tot het vierde leerjaar.</strong> Met jaarklassen voor instructiemomenten. Leerlingen leren van én met elkaar over leeftijdsgrenzen heen.</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN -->
+<section class="examples">
+  <div class="container">
+    <div class="reveal">
+      <span class="label">HET WERKT AL </span>
+      <h2 style="margin-top: 1rem; max-width: 22ch;">Middelbare Freinetscholen die hun strepen al verdiend hebben.</h2>
+      <p style="margin-top: 1.5rem; max-width: 54ch; font-size: 1.05rem;">Wij verzinnen niks nieuws. We bouwen voort op scholen die al jaren bewijzen dat deze aanpak werkt — in verschillende netten, in verschillende regio's.</p>
+    </div>
+    <div class="examples-grid reveal" style="transition-delay: 0.15s">
+      <div class="school-card">
+        <span>Kortrijk · Katholiek</span>
+        <h4>Vier</h4>
+      </div>
+      <div class="school-card">
+        <span>Sint-Niklaas · GO!</span>
+        <h4>Da Vinci</h4>
+      </div>
+      <div class="school-card">
+        <span>Mechelen · GO!</span>
+        <h4>Campus Caputsteen</h4>
+      </div>
+      <div class="school-card">
+        <span>Gent · Stedelijk</span>
+        <h4>De Wingerd</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="small-cta">
+  <div class="container">
+    <div class="reveal">
+      <span class="label" style="color: var(--yellow);">WIL JE MEER WETEN?</span>
+      <h2 style="margin-top: 1.2rem;">Geen verhaal uit een <em>brochure</em>.<br>Kom gewoon eens langs.</h2>
+      <a href="contact.html" class="btn btn-yellow">
+        Neem contact op
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+          </span>
+          <span class="brand-text" style="color: var(--paper);">Freinet Middelbaar<small style="color: rgba(250,245,230,0.6);">Kempen · 2027</small></span>
+        </a>
+        <p class="footer-tagline">Een middelbare Freinetschool in de Kempen. Opstart september 2027.</p>
+      </div>
+      <div class="footer-col"><h4>De school</h4><ul><li><a href="visie.html">Onze visie</a></li><li><a href="updates.html">Updates</a></li><li><a href="helpen.html">Werkgroepen</a></li></ul></div>
+      <div class="footer-col"><h4>Meedoen</h4><ul><li><a href="helpen.html">Help mee</a></li><li><a href="contact.html">Contact</a></li><li><a href="mailto:freinetmiddelbaar@gmail.com">E-mail</a></li></ul></div>
+      <div class="footer-col"><h4>Info</h4><ul><li><a href="updates.html#nieuwsbrief">Nieuwsbrief</a></li><li><a href="contact.html">Partner worden</a></li><li><a href="contact.html">Pers</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Freinet Middelbaar Kempen · Een ouderinitiatief in opstart</span>
+      <span>Met goesting gebouwd in de Kempen ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

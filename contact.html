@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Freinet Middelbaar Kempen</title>
+<meta name="description" content="Stuur ons een bericht. Vragen, ideeën, aanbod om te helpen, of gewoon benieuwd? We horen graag van je.">
+<meta name="theme-color" content="#A5E0E5">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F9D71C' stroke='%23151515' stroke-width='4'/%3E%3Cpath d='M22 28 L32 20 L42 28 L32 36 Z' fill='%23151515'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-header { background: var(--pink); }
+  .page-header h1 em {
+    font-style: normal;
+    background: var(--yellow);
+    padding: 0 0.2em;
+    border: 3px solid var(--ink);
+    display: inline-block;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .page-star { top: 15%; right: 8%; width: 100px; height: 100px; animation: bobble 5s ease-in-out infinite; }
+  @media (max-width: 720px) { .page-star { display: none; } }
+
+  /* Contact grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.3fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  @media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  .contact-info-box {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 7px 7px 0 var(--ink);
+    padding: 2rem;
+    align-self: start;
+  }
+  .contact-info-box h3 { margin-bottom: 1.5rem; font-size: 1.3rem; }
+  .contact-info-list {
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 1.4rem;
+  }
+  .contact-info-list li {
+    display: flex; gap: 1rem;
+    align-items: flex-start;
+  }
+  .contact-icon {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 20px; height: 20px; stroke: var(--ink); }
+  .contact-info-text {
+    flex: 1;
+  }
+  .contact-info-text strong {
+    display: block;
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 0.3rem;
+  }
+  .contact-info-text a, .contact-info-text span {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .contact-info-text a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+
+  .contact-handnote {
+    margin-top: 2rem;
+    padding: 1.2rem;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    line-height: 1.2;
+    transform: rotate(-1deg);
+  }
+
+  /* Formulier */
+  .contact-form {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 7px 7px 0 var(--ink);
+    padding: clamp(1.8rem, 3vw, 2.5rem);
+  }
+  .form-row { margin-bottom: 1.5rem; }
+  .form-row-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 560px) { .form-row-split { grid-template-columns: 1fr; } }
+
+  .form-submit {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 var(--yellow);
+    transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+  .form-submit:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--yellow);
+  }
+  .form-submit svg { width: 18px; height: 18px; }
+
+  .form-success {
+    display: none;
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: var(--lime);
+    border: 2px solid var(--ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .form-success.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+      </span>
+      <span class="brand-text">Freinet Middelbaar<small>Kempen · 2027</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="visie.html">De visie</a></li>
+      <li><a href="updates.html">Updates</a></li>
+      <li><a href="helpen.html">Help mee</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <span class="star page-star" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#F9D71C" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+  <div class="container">
+    <div class="reveal">
+      <span class="label">CONTACT </span>
+      <h1 style="margin-top: 1rem;">We horen <em>graag</em> van je.</h1>
+      <p class="page-header-lead" style="color: var(--ink);">
+        Een vraag, een idee, een aanbod om mee te helpen, of gewoon benieuwd. Geen vraag is te klein. We antwoorden zo snel als we kunnen — meestal binnen een paar dagen.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="bg-paper">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Info -->
+      <div class="reveal">
+        <div class="contact-info-box">
+          <h3>Even snel...</h3>
+          <ul class="contact-info-list">
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <strong>E-mail</strong>
+                <a href="mailto:freinetmiddelbaar@gmail.com">freinetmiddelbaar@gmail.com</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <strong>Regio</strong>
+                <span>Turnhout · Mol-Geel · Zuiderkempen</span>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <strong>Opstart</strong>
+                <span>September 2027 · eerste graad</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="contact-handnote">
+            ✦ Liever bellen?<br>Stuur eerst een mailtje, dan plannen we een moment in.
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulier -->
+      <form class="contact-form reveal" id="contactForm" style="transition-delay: 0.1s">
+        <div class="form-row form-row-split">
+          <div>
+            <label for="f-naam">Naam</label>
+            <input type="text" id="f-naam" name="naam" required placeholder="Je naam">
+          </div>
+          <div>
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" name="email" required placeholder="jij@voorbeeld.be">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="f-rol">Jij bent een…</label>
+          <select id="f-rol" name="rol">
+            <option>Ouder of toekomstige ouder</option>
+            <option>Sponsor of partner</option>
+            <option>Onderwijsprofessional</option>
+            <option>Eigenaar of aanbieder van een locatie</option>
+            <option>Geïnteresseerde of pers</option>
+            <option>Anders</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Waar wil je over praten?</label>
+          <div class="chips">
+            <div class="chip"><input type="checkbox" id="t-info"><label for="t-info">Meer info</label></div>
+            <div class="chip"><input type="checkbox" id="t-helpen"><label for="t-helpen">Meehelpen</label></div>
+            <div class="chip"><input type="checkbox" id="t-sponsor"><label for="t-sponsor">Sponsoring</label></div>
+            <div class="chip"><input type="checkbox" id="t-locatie"><label for="t-locatie">Locatie aanbieden</label></div>
+            <div class="chip"><input type="checkbox" id="t-anders"><label for="t-anders">Iets anders</label></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="f-bericht">Bericht</label>
+          <textarea id="f-bericht" name="bericht" required placeholder="Vertel ons wat je op het hart hebt…"></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">
+          STUUR 'T MAAR
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <div class="form-success" id="formSuccess">
+          ✦ Bedankt! Je bericht is verstuurd. We horen graag van je — binnenkort.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+          </span>
+          <span class="brand-text" style="color: var(--paper);">Freinet Middelbaar<small style="color: rgba(250,245,230,0.6);">Kempen · 2027</small></span>
+        </a>
+        <p class="footer-tagline">Een middelbare Freinetschool in de Kempen. Opstart september 2027.</p>
+      </div>
+      <div class="footer-col"><h4>De school</h4><ul><li><a href="visie.html">Onze visie</a></li><li><a href="updates.html">Updates</a></li><li><a href="helpen.html">Werkgroepen</a></li></ul></div>
+      <div class="footer-col"><h4>Meedoen</h4><ul><li><a href="helpen.html">Help mee</a></li><li><a href="contact.html">Contact</a></li><li><a href="mailto:freinetmiddelbaar@gmail.com">E-mail</a></li></ul></div>
+      <div class="footer-col"><h4>Info</h4><ul><li><a href="updates.html#nieuwsbrief">Nieuwsbrief</a></li><li><a href="contact.html">Partner worden</a></li><li><a href="contact.html">Pers</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Freinet Middelbaar Kempen · Een ouderinitiatief in opstart</span>
+      <span>Met goesting gebouwd in de Kempen ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

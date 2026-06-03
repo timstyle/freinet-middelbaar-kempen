@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Updates — Freinet Middelbaar Kempen</title>
+<meta name="description" content="Wat gebeurt er achter de schermen bij Freinet Middelbaar Kempen? Updates, mijlpalen en nieuwsbrieven.">
+<meta name="theme-color" content="#A5E0E5">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F9D71C' stroke='%23151515' stroke-width='4'/%3E%3Cpath d='M22 28 L32 20 L42 28 L32 36 Z' fill='%23151515'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-header { background: var(--mint); }
+  .page-header h1 em {
+    font-style: normal;
+    background: var(--yellow);
+    padding: 0 0.2em;
+    border: 3px solid var(--ink);
+    display: inline-block;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .page-star { top: 25%; right: 8%; width: 100px; height: 100px; animation: bobble 5s ease-in-out infinite; }
+  @media (max-width: 720px) { .page-star { display: none; } }
+
+  /* Tijdlijn / parcours */
+  .parcours {
+    background: var(--mint);
+    padding: clamp(3rem, 5vw, 4.5rem) 0;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    overflow-x: auto;
+  }
+  .parcours-line {
+    display: flex;
+    align-items: stretch;
+    min-width: max-content;
+    gap: 0;
+    padding: 2rem 0;
+    position: relative;
+  }
+  .parcours-step {
+    width: 200px;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .parcours-step::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    width: 100%;
+    height: 4px;
+    background: var(--ink);
+    z-index: 0;
+  }
+  .parcours-step:last-child::before { display: none; }
+  .parcours-dot {
+    position: relative;
+    z-index: 1;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    margin: 0 auto 1rem;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .parcours-step.done .parcours-dot { background: var(--lime); }
+  .parcours-step.now .parcours-dot { background: var(--yellow); transform: scale(1.15); }
+  .parcours-step.next .parcours-dot { background: var(--paper); }
+  .parcours-step.future .parcours-dot { background: var(--paper); opacity: 0.6; }
+  .parcours-when {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .parcours-step.future .parcours-when,
+  .parcours-step.future .parcours-text { opacity: 0.55; }
+  .parcours-text {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Updates lijst */
+  .updates-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 820px) { .updates-list { grid-template-columns: 1fr; } }
+
+  .update {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 7px 7px 0 var(--ink);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    display: flex;
+    flex-direction: column;
+  }
+  .update:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .update-banner {
+    height: 12px;
+    background: var(--yellow);
+    border-bottom: 3px solid var(--ink);
+  }
+  .update:nth-child(2) .update-banner { background: var(--pink); }
+  .update:nth-child(3) .update-banner { background: var(--lime); }
+  .update:nth-child(4) .update-banner { background: var(--coral); }
+  .update:nth-child(5) .update-banner { background: var(--violet); }
+  .update-body { padding: 1.8rem; }
+  .update-meta {
+    display: flex; gap: 0.8rem; align-items: center;
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 0.8rem;
+  }
+  .update-tag {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  .update h3 {
+    text-transform: none;
+    font-size: 1.3rem;
+    line-height: 1.15;
+    margin-bottom: 0.7rem;
+  }
+  .update p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.55; }
+  .update-readmore {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 1.2rem;
+    transition: gap 0.2s;
+  }
+  .update:hover .update-readmore { gap: 0.7rem; }
+
+  /* Nieuwsbrief */
+  .newsletter {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(3rem, 5vw, 4.5rem) 0;
+    border-top: 4px solid var(--yellow);
+  }
+  .newsletter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (max-width: 820px) { .newsletter-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .newsletter h2 { color: var(--paper); }
+  .newsletter h2 em { font-style: normal; color: var(--yellow); }
+  .newsletter p {
+    color: rgba(250, 245, 230, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin-top: 1rem;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 0.7rem;
+  }
+  .newsletter-form input {
+    background: var(--paper);
+    border: 2px solid var(--paper);
+    flex: 1;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .newsletter-form input:focus {
+    border-color: var(--yellow);
+    box-shadow: 4px 4px 0 var(--yellow);
+  }
+  .newsletter-form button {
+    background: var(--yellow);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 0 1.5rem;
+    font-family: var(--font-headline);
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 var(--yellow);
+    transition: transform 0.15s var(--ease);
+  }
+  .newsletter-form button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--yellow);
+  }
+  @media (max-width: 480px) {
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form button { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+      </span>
+      <span class="brand-text">Freinet Middelbaar<small>Kempen · 2027</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="visie.html">De visie</a></li>
+      <li><a href="updates.html">Updates</a></li>
+      <li><a href="helpen.html">Help mee</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <span class="star page-star" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#FF8C6E" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+  <div class="container">
+    <div class="reveal">
+      <span class="label">UPDATES & NIEUWS </span>
+      <h1 style="margin-top: 1rem;">Wat gebeurt er <em>achter de schermen</em>?</h1>
+      <p class="page-header-lead">
+        Een nieuwe school bouw je niet in een paar maanden. Hier houden we je op de hoogte van waar we staan: mijlpalen, meetings, belangrijke stappen — en de momenten waarop we je hulp nodig hebben.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section class="parcours">
+  <div class="container" style="margin-bottom: 1.5rem;">
+    <span class="label">ONS PARCOURS </span>
+    <h2 style="margin-top: 0.8rem;">Van droom naar werkelijkheid.</h2>
+  </div>
+  <div class="container">
+    <div class="parcours-line">
+      <div class="parcours-step done">
+        <div class="parcours-dot">1</div>
+        <div class="parcours-when">Herfst '25</div>
+        <div class="parcours-text">Ouders ontmoeten elkaar</div>
+      </div>
+      <div class="parcours-step done">
+        <div class="parcours-dot">2</div>
+        <div class="parcours-when">December '25</div>
+        <div class="parcours-text">Behoeftebevraging 8 basisscholen</div>
+      </div>
+      <div class="parcours-step done">
+        <div class="parcours-dot">3</div>
+        <div class="parcours-when">Maart '26</div>
+        <div class="parcours-text">Kick-off werkgroepen</div>
+      </div>
+      <div class="parcours-step now">
+        <div class="parcours-dot">4</div>
+        <div class="parcours-when">Vandaag</div>
+        <div class="parcours-text">Werkgroepen in actie</div>
+      </div>
+      <div class="parcours-step next">
+        <div class="parcours-dot">5</div>
+        <div class="parcours-when">Komende maanden</div>
+        <div class="parcours-text">Plan van aanpak per werkgroep</div>
+      </div>
+      <div class="parcours-step future">
+        <div class="parcours-dot">6</div>
+        <div class="parcours-when">Sept 2027</div>
+        <div class="parcours-text">2 of 3 vestigingen openen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPDATES LIJST -->
+<section class="bg-paper">
+  <div class="container">
+    <div class="reveal">
+      <span class="label">LATEST </span>
+      <h2 style="margin-top: 0.8rem;">Recente updates.</h2>
+    </div>
+
+    <div class="updates-list">
+      <a href="#" class="update reveal">
+        <div class="update-banner"></div>
+        <div class="update-body">
+          <div class="update-meta">
+            <span class="update-tag">Mijlpaal</span>
+            <span>24 maart 2026</span>
+          </div>
+          <h3>Eerste Kernclub-meeting: de werkgroepen zijn gevormd</h3>
+          <p>Op dinsdag 24 maart kwamen ouders en vrijwilligers voor het eerst samen in De Steltloper. Vier actieve werkgroepen gingen van start, twee rusten nog tot 2027.</p>
+          <span class="update-readmore">Lees verder →</span>
+        </div>
+      </a>
+
+      <a href="#" class="update reveal" style="transition-delay: 0.1s">
+        <div class="update-banner"></div>
+        <div class="update-body">
+          <div class="update-meta">
+            <span class="update-tag">Nieuwsbrief</span>
+            <span>maart 2026</span>
+          </div>
+          <h3>425× merci: resultaten van de behoeftebevraging</h3>
+          <p>De resultaten zijn binnen en ze zijn duidelijk. Een uitgebreid verslag met cijfers, citaten en de belangrijkste conclusies uit de bevraging bij 425 gezinnen.</p>
+          <span class="update-readmore">Download het verslag →</span>
+        </div>
+      </a>
+
+      <a href="#" class="update reveal" style="transition-delay: 0.15s">
+        <div class="update-banner"></div>
+        <div class="update-body">
+          <div class="update-meta">
+            <span class="update-tag">Werkgroep</span>
+            <span>april 2026</span>
+          </div>
+          <h3>Locatie & Infrastructuur start met screeningen</h3>
+          <p>De werkgroep locatie gaat in gesprek met gemeenten, eigenaars en partners zoals IOK. Deadline voor een beslissing: november 2026.</p>
+          <span class="update-readmore">Volg de voortgang →</span>
+        </div>
+      </a>
+
+      <a href="#" class="update reveal" style="transition-delay: 0.2s">
+        <div class="update-banner"></div>
+        <div class="update-body">
+          <div class="update-meta">
+            <span class="update-tag">Aankondiging</span>
+            <span>mei 2026</span>
+          </div>
+          <h3>Infomomenten voor ouders gepland</h3>
+          <p>In mei en juni organiseren we infomomenten in de drie subregio's. Praat met initiatiefnemers, stel je vragen en ontmoet andere geïnteresseerde gezinnen.</p>
+          <span class="update-readmore">Bekijk data →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NIEUWSBRIEF -->
+<section class="newsletter" id="nieuwsbrief">
+  <div class="container">
+    <div class="newsletter-grid">
+      <div class="reveal">
+        <span class="label" style="color: var(--yellow);">BLIJF MEE</span>
+        <h2 style="margin-top: 1rem;">Niets <em>missen</em>?<br>Schrijf je in.</h2>
+        <p>Ongeveer één keer per maand een update over onze voortgang. Geen spam, geen marketing — alleen de stappen die we samen zetten.</p>
+      </div>
+      <form class="newsletter-form reveal" id="newsletterForm" style="transition-delay: 0.1s">
+        <input type="email" placeholder="jouw@emailadres.be" required>
+        <button type="submit">Inschrijven</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+          </span>
+          <span class="brand-text" style="color: var(--paper);">Freinet Middelbaar<small style="color: rgba(250,245,230,0.6);">Kempen · 2027</small></span>
+        </a>
+        <p class="footer-tagline">Een middelbare Freinetschool in de Kempen. Opstart september 2027.</p>
+      </div>
+      <div class="footer-col"><h4>De school</h4><ul><li><a href="visie.html">Onze visie</a></li><li><a href="updates.html">Updates</a></li><li><a href="helpen.html">Werkgroepen</a></li></ul></div>
+      <div class="footer-col"><h4>Meedoen</h4><ul><li><a href="helpen.html">Help mee</a></li><li><a href="contact.html">Contact</a></li><li><a href="mailto:freinetmiddelbaar@gmail.com">E-mail</a></li></ul></div>
+      <div class="footer-col"><h4>Info</h4><ul><li><a href="updates.html#nieuwsbrief">Nieuwsbrief</a></li><li><a href="contact.html">Partner worden</a></li><li><a href="contact.html">Pers</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Freinet Middelbaar Kempen · Een ouderinitiatief in opstart</span>
+      <span>Met goesting gebouwd in de Kempen ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>

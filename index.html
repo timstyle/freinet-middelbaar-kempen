@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freinet Middelbaar Kempen — Een middelbare school, anders.</title>
+<meta name="description" content="Een nieuwe middelbare Freinetschool in de Kempen. Opstart september 2027. Leren door te doen, te onderzoeken en samen te werken.">
+<meta name="theme-color" content="#A5E0E5">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Freinet Middelbaar Kempen — 2027">
+<meta property="og:description" content="Een middelbare school in de Kempen waar leerlingen écht mogen leren. Opstart 2027.">
+<meta property="og:locale" content="nl_BE">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F9D71C' stroke='%23151515' stroke-width='4'/%3E%3Cpath d='M22 28 L32 20 L42 28 L32 36 Z' fill='%23151515'/%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: clamp(3rem, 7vw, 6rem) 0 clamp(4rem, 8vw, 7rem);
+    overflow: hidden;
+  }
+
+  .hero-bracket {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--ink);
+    display: inline-block;
+    padding: 0.55rem 0.95rem;
+    border: 2px solid var(--ink);
+    margin-bottom: 2rem;
+    background: var(--paper);
+    letter-spacing: 0.04em;
+  }
+
+  .hero h1 {
+    max-width: 18ch;
+    margin-bottom: 2rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: var(--yellow);
+    padding: 0 0.2em;
+    border: 3px solid var(--ink);
+    display: inline-block;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 var(--ink);
+    margin: 0 0.05em;
+    line-height: 1;
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 1.55vw, 1.25rem);
+    line-height: 1.55;
+    margin: 0 0 2.5rem;
+    max-width: 54ch;
+    color: var(--ink);
+  }
+  .hero-ctas {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  /* Sticker-rij rechtsonder */
+  .hero-stickers {
+    position: absolute;
+    right: clamp(1.5rem, 4vw, 3rem);
+    top: clamp(4rem, 8vw, 7rem);
+    display: flex; flex-direction: column; gap: 1.5rem;
+    z-index: 2;
+  }
+  @media (max-width: 900px) { .hero-stickers { display: none; } }
+
+  .sticker {
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1.2rem 1rem;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    line-height: 0.95;
+  }
+  .sticker-1 {
+    background: var(--yellow);
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    transform: rotate(-8deg);
+    font-size: 1.1rem;
+  }
+  .sticker-1 .big {
+    display: block;
+    font-size: 2.5rem;
+    margin: 0.2rem 0;
+  }
+  .sticker-2 {
+    background: var(--pink);
+    color: var(--paper);
+    width: 140px;
+    padding: 0.9rem 0.8rem;
+    transform: rotate(5deg);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+  .sticker-2 .big {
+    display: block;
+    font-size: 1.8rem;
+    margin-top: 0.2rem;
+  }
+  .sticker-3 {
+    background: var(--paper);
+    width: 120px;
+    padding: 0.8rem;
+    transform: rotate(-4deg);
+    font-size: 0.78rem;
+  }
+
+  /* Hero stats */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    background: var(--paper);
+  }
+  @media (max-width: 620px) { .hero-stats { grid-template-columns: 1fr; } }
+  .hero-stat {
+    padding: 1.7rem 1.2rem;
+    border-right: 3px solid var(--ink);
+    text-align: left;
+  }
+  .hero-stat:last-child { border-right: none; }
+  @media (max-width: 620px) {
+    .hero-stat { border-right: none; border-bottom: 3px solid var(--ink); }
+    .hero-stat:last-child { border-bottom: none; }
+  }
+  .hero-stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 0.9;
+    color: var(--ink);
+  }
+  .hero-stat-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+    display: block;
+  }
+
+  /* MANIFEST */
+  .manifest {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .manifest h2 {
+    color: var(--paper);
+    font-size: clamp(2.4rem, 6.5vw, 5rem);
+    max-width: 17ch;
+  }
+  .manifest h2 em { font-style: normal; color: var(--yellow); }
+  .manifest-lead {
+    font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+    line-height: 1.55;
+    color: rgba(250, 245, 230, 0.85);
+    max-width: 54ch;
+    margin-top: 2rem;
+  }
+
+  .manifest-list {
+    list-style: none;
+    margin-top: 4rem;
+    border-top: 2px solid rgba(250, 245, 230, 0.18);
+  }
+  .manifest-list li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.8rem 0;
+    border-bottom: 2px solid rgba(250, 245, 230, 0.18);
+    transition: background 0.2s;
+  }
+  @media (max-width: 720px) {
+    .manifest-list li { grid-template-columns: auto 1fr; gap: 1rem; padding: 1.3rem 0; }
+    .manifest-list li .to-arrow { display: none; }
+  }
+  .manifest-list li:hover { background: rgba(249, 215, 28, 0.07); }
+  .manifest-num {
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 4vw, 3.5rem);
+    color: var(--yellow);
+    line-height: 1;
+    min-width: 3ch;
+  }
+  .manifest-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.2vw, 1.9rem);
+    line-height: 1.1;
+    color: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .manifest-text em { font-style: normal; color: var(--yellow); }
+  .to-arrow { color: var(--yellow); font-size: 2rem; line-height: 1; }
+
+  /* CTA */
+  .home-cta {
+    background: var(--yellow);
+    padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+    text-align: center;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .home-cta h2 { max-width: 20ch; margin: 0 auto 1.3rem; }
+  .home-cta p { max-width: 52ch; margin: 0 auto 2.5rem; font-size: 1.08rem; }
+  .home-cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+  /* Sterren */
+  .hero-star-1 { top: 3%; left: -1%; width: 100px; height: 100px; animation: bobble 5s ease-in-out infinite; }
+  .hero-star-2 { bottom: 12%; left: 44%; width: 65px; height: 65px; animation: bobble 6s ease-in-out 0.5s infinite reverse; }
+  .manifest-star { top: 14%; right: 5%; width: 120px; height: 120px; opacity: 0.9; }
+  .cta-star { top: 18%; right: 8%; width: 75px; height: 75px; animation: bobble 4.5s ease-in-out infinite; }
+  .cta-star-2 { bottom: 18%; left: 6%; width: 60px; height: 60px; animation: bobble 5.5s ease-in-out 0.7s infinite reverse; }
+
+  @media (max-width: 720px) {
+    .hero-star-2, .cta-star-2 { display: none; }
+    .hero-star-1, .manifest-star, .cta-star { width: 70px; height: 70px; }
+  }
+</style>
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="#151515" stroke="#151515" stroke-width="1" stroke-linejoin="round">
+          <path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        Freinet Middelbaar
+        <small>Kempen · 2027</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="visie.html">De visie</a></li>
+      <li><a href="updates.html">Updates</a></li>
+      <li><a href="helpen.html">Help mee</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero bg-mint">
+  <span class="star hero-star-1" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#E86A9B" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+  <span class="star hero-star-2" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#F9D71C" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+
+  <!-- Stickers -->
+  <div class="hero-stickers" aria-hidden="true">
+    <div class="sticker sticker-1">
+      start<span class="big">2027</span>kempen
+    </div>
+    <div class="sticker sticker-2">
+      ~50<br>leerlingen<span class="big">jaar 1</span>
+    </div>
+    <div class="sticker sticker-3">
+      Een ouderproject<br>in opbouw ✦
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="reveal">
+      <span class="hero-bracket">[ OPSTART · SEPT 2027 · REGIO KEMPEN ]</span>
+      <h1>Een middelbare school die <em>anders</em> is. En tóch gewoon <em>school</em>.</h1>
+      <p class="hero-lead">
+        Waar leerlingen vragen stellen die niemand verwacht. Waar je leert door te doen, te knoeien, te proberen. Waar niemand een nummer is. Een échte middelbare Freinetschool &mdash; in de Kempen. Samen met jou.
+      </p>
+      <div class="hero-ctas">
+        <a href="visie.html" class="btn btn-yellow">
+          Ontdek de visie
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="helpen.html" class="btn btn-ghost">
+          Ik wil helpen
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strook -->
+<section style="padding: 0; background: var(--mint);">
+  <div class="container" style="padding-left: 0; padding-right: 0;">
+    <div class="hero-stats reveal">
+      <div class="hero-stat">
+        <span class="hero-stat-num">~50</span>
+        <span class="hero-stat-label">Leerlingen in jaar één</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">425</span>
+        <span class="hero-stat-label">Gezinnen bevraagd</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">60+</span>
+        <span class="hero-stat-label">Ouders bouwen mee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFEST / WAAROM -->
+<section class="manifest">
+  <span class="star manifest-star" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#FF8C6E" stroke="#FAF5E6" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+
+  <div class="container">
+    <div class="reveal">
+      <span class="label" style="color: var(--yellow);">WAAROM DIT NODIG IS</span>
+      <h2 style="margin-top: 1.2rem;">Na de basisschool houdt het <em>plots</em> op.</h2>
+      <p class="manifest-lead">
+        Sterke Freinet-basisscholen. Kinderen die leren door te onderzoeken, samen werken, vragen durven stellen. En dan &mdash; vanaf het eerste middelbaar &mdash; belanden ze in een systeem dat daar niks meer mee doet. Dat moet anders.
+      </p>
+    </div>
+
+    <ol class="manifest-list reveal" style="transition-delay: 0.2s">
+      <li>
+        <span class="manifest-num">01</span>
+        <span class="manifest-text">Er is <em>geen Freinet vervolg</em> in de Kempen.</span>
+        <span class="to-arrow">→</span>
+      </li>
+      <li>
+        <span class="manifest-num">02</span>
+        <span class="manifest-text">Schoolprofielen worden <em>strakker</em> en minder gedifferentieerd.</span>
+        <span class="to-arrow">→</span>
+      </li>
+      <li>
+        <span class="manifest-num">03</span>
+        <span class="manifest-text">Ouders zoeken <em>bewust</em> een alternatief.</span>
+        <span class="to-arrow">→</span>
+      </li>
+      <li>
+        <span class="manifest-num">04</span>
+        <span class="manifest-text">83% van de bevraagde ouders vindt dit <em>cruciaal</em>.</span>
+        <span class="to-arrow">→</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="home-cta">
+  <span class="star cta-star" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#9D7DD1" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+  <span class="star cta-star-2" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L58 35 L90 38 L64 58 L74 90 L50 70 L26 90 L36 58 L10 38 L42 35 Z" fill="#A5E0E5" stroke="#151515" stroke-width="3" stroke-linejoin="round"/></svg>
+  </span>
+
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow-hand">let's make this happen ✦</span>
+      <h2>Help jij mee <em style="background: var(--ink); color: var(--yellow); padding: 0 0.2em; display: inline-block; transform: rotate(-2deg);">bouwen?</em></h2>
+      <p>Van locatie scouten tot subsidies aanvragen, van websites maken tot workshops geven. We zoeken denkers, doeners en iedereen ertussen.</p>
+      <div class="home-cta-buttons">
+        <a href="helpen.html" class="btn">
+          Bekijk de werkgroepen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="contact.html" class="btn btn-ghost">
+          Stuur een berichtje
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="#151515"><path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 20 L12 16 L6.5 20 L8.5 13.5 L3 9 L10 9 Z"/></svg>
+          </span>
+          <span class="brand-text" style="color: var(--paper);">
+            Freinet Middelbaar
+            <small style="color: rgba(250,245,230,0.6);">Kempen · 2027</small>
+          </span>
+        </a>
+        <p class="footer-tagline">Een middelbare Freinetschool in de Kempen. Opstart september 2027. Een ouderinitiatief in volle opbouw.</p>
+      </div>
+      <div class="footer-col">
+        <h4>De school</h4>
+        <ul>
+          <li><a href="visie.html">Onze visie</a></li>
+          <li><a href="updates.html">Updates</a></li>
+          <li><a href="helpen.html">Werkgroepen</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Meedoen</h4>
+        <ul>
+          <li><a href="helpen.html">Help mee</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="mailto:freinetmiddelbaar@gmail.com">E-mail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="updates.html#nieuwsbrief">Nieuwsbrief</a></li>
+          <li><a href="contact.html">Partner worden</a></li>
+          <li><a href="contact.html">Pers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Freinet Middelbaar Kempen · Een ouderinitiatief in opstart</span>
+      <span>Met goesting gebouwd in de Kempen ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
