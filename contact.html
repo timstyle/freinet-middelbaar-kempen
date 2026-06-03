@@ -193,8 +193,10 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <div class="contact-info-text">
-                <strong>E-mail</strong>
-                <a href="mailto:freinetmiddelbaar@gmail.com">freinetmiddelbaar@gmail.com</a>
+                <strong>E-mail per vestiging</strong>
+                <a href="mailto:mol@keerpuntscholen.be">mol@keerpuntscholen.be</a><br>
+                <a href="mailto:turnhout@keerpuntscholen.be">turnhout@keerpuntscholen.be</a><br>
+                <a href="mailto:herselt@keerpuntscholen.be">herselt@keerpuntscholen.be</a>
               </div>
             </li>
             <li>
@@ -202,8 +204,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div class="contact-info-text">
-                <strong>Regio</strong>
-                <span>Turnhout · Mol-Geel · Zuiderkempen</span>
+                <strong>Vestigingen</strong>
+                <span>Mol · Turnhout · Herselt</span>
               </div>
             </li>
             <li>
@@ -225,6 +227,7 @@
 
       <!-- Formulier -->
       <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/mqeozwdj" method="POST" style="transition-delay: 0.1s">
+        <input type="hidden" name="_subject" value="Nieuw bericht via freinet-middelbaar-kempen.be">
         <div class="form-row form-row-split">
           <div>
             <label for="f-naam">Naam</label>
@@ -234,6 +237,16 @@
             <label for="f-email">E-mail</label>
             <input type="email" id="f-email" name="email" required placeholder="jij@voorbeeld.be">
           </div>
+        </div>
+
+        <div class="form-row">
+          <label for="f-vestiging">Welke vestiging?</label>
+          <select id="f-vestiging" name="vestiging">
+            <option>Maakt niet uit / algemeen</option>
+            <option>Mol</option>
+            <option>Turnhout</option>
+            <option>Herselt</option>
+          </select>
         </div>
 
         <div class="form-row">
@@ -291,7 +304,7 @@
         <p class="footer-tagline">Een middelbare Freinetschool in de Kempen. Opstart september 2027.</p>
       </div>
       <div class="footer-col"><h4>De school</h4><ul><li><a href="visie.html">Onze visie</a></li><li><a href="updates.html">Updates</a></li><li><a href="helpen.html">Werkgroepen</a></li></ul></div>
-      <div class="footer-col"><h4>Meedoen</h4><ul><li><a href="helpen.html">Help mee</a></li><li><a href="contact.html">Contact</a></li><li><a href="mailto:freinetmiddelbaar@gmail.com">E-mail</a></li></ul></div>
+      <div class="footer-col"><h4>Meedoen</h4><ul><li><a href="helpen.html">Help mee</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">E-mail ons</a></li></ul></div>
       <div class="footer-col"><h4>Info</h4><ul><li><a href="updates.html#nieuwsbrief">Nieuwsbrief</a></li><li><a href="contact.html">Partner worden</a></li><li><a href="contact.html">Pers</a></li></ul></div>
     </div>
     <div class="footer-bottom">

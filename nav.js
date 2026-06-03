@@ -33,7 +33,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Contactformulier — verstuurd via Formspree
+  // Contactformulier — verstuurd via Formspree (geen JS nodig)
 
   // Nieuwsbrief demo
   const newsletter = document.getElementById('newsletterForm');
